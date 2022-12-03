@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class AssignmentsTest {
     String buffer = "";
+
     public String findCommonLetter(String first, String second) {
         return first.chars().filter(a -> second.chars().anyMatch(b -> a == b)).mapToObj(a -> ((char)a)+"").collect(Collectors.joining());
     }

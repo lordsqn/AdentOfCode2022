@@ -10,28 +10,25 @@ import java.util.List;
 
 public class AssignmentsTest {
 
-    public void calculateSumOfCaloriesForEachElf(String line, List<Integer> sumCaloriesOfEachElf) {
-        if (line.isEmpty()) {
-            sumCaloriesOfEachElf.add(0);
-        } else {
-            int last = sumCaloriesOfEachElf.size() - 1;
-            sumCaloriesOfEachElf.set(last, sumCaloriesOfEachElf.get(last) + Integer.parseInt(line));
-        }
+    public List<Integer> calculateSumOfCaloriesForEachElf(List<String> list) {
+        List<Integer> sums = new ArrayList<Integer>() {{add(0);}};
+        list.forEach(line -> {
+            if (line.isEmpty()) sums.add(0);
+            else sums.set(sums.size()-1, sums.get(sums.size()-1) + Integer.parseInt(line));
+        });
+        return sums;
     }
 
     @Test
     public void assigment1() throws IOException {
-        List<Integer> sumCaloriesOfEachElf = new ArrayList<Integer>() {{add(0);}};
-        Utils.processLine("day1/input.txt", line -> calculateSumOfCaloriesForEachElf(line, sumCaloriesOfEachElf));
-
+        List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
         int highestCarriedCalories = sumCaloriesOfEachElf.stream().max(Integer::compareTo).orElse(-1);
         System.out.println("Elf with highest carry calories count: " + highestCarriedCalories);
     }
 
     @Test
     public void assigment2() throws IOException {
-        List<Integer> sumCaloriesOfEachElf = new ArrayList<Integer>() {{add(0);}};
-        Utils.processLine("day1/input.txt", line -> calculateSumOfCaloriesForEachElf(line, sumCaloriesOfEachElf));
+        List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
 
         sumCaloriesOfEachElf.sort(Integer::compareTo);
         Collections.reverse(sumCaloriesOfEachElf);

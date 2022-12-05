@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AssignmentsTest {
 
     @Test
-    public void assigment1() throws IOException {
+    public void assignment1() {
         AtomicInteger score = new AtomicInteger();
 
         Utils.processLine("day2/input.txt", line -> {
@@ -23,7 +23,7 @@ public class AssignmentsTest {
     }
 
     @Test
-    public void assigment2() throws IOException {
+    public void assignment2() {
         AtomicInteger score = new AtomicInteger();
 
         Utils.processLine("day2/input.txt", line -> {

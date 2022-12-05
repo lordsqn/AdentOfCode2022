@@ -21,17 +21,22 @@ public class Utils {
         List<T> process (List<String> list);
     }
 
-    public static void processLine(String path, Process process) throws IOException {
+    public static void processLine(String path, Process process) {
         process(path, list -> {
             list.forEach(process::process);
             return null;
         });
     }
 
-    public static <T> List<T> process(String path, ProcessList<T> process) throws IOException {
-        List<String> list = Files.readAllLines(Paths.get(new File(Optional.ofNullable(Utils.class.getClassLoader().getResource(path))
-                .orElseThrow(() -> new RuntimeException("File not found: " + path)).getPath()).getAbsolutePath()));
-        return process.process(list);
+    public static <T> List<T> process(String path, ProcessList<T> process) {
+        try {
+            List<String> list = Files.readAllLines(Paths.get(new File(Optional.ofNullable(Utils.class.getClassLoader().getResource(path))
+                    .orElseThrow(() -> new RuntimeException("File not found: " + path)).getPath()).getAbsolutePath()));
+            return process.process(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
 }

@@ -16,7 +16,7 @@ public class AssignmentsTest {
     }
 
     @Test
-    public void assigment1() throws IOException {
+    public void assignment1() {
         AtomicInteger sum = new AtomicInteger();
 
         Utils.processLine("day3/input.txt", line -> {
@@ -28,7 +28,7 @@ public class AssignmentsTest {
     }
 
     @Test
-    public void assigment2() throws IOException {
+    public void assignment2() {
         AtomicInteger sum = new AtomicInteger();
         AtomicBoolean sumGroup = new AtomicBoolean(false);
 

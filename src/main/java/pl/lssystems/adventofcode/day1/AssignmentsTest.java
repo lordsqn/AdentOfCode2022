@@ -20,14 +20,14 @@ public class AssignmentsTest {
     }
 
     @Test
-    public void assigment1() throws IOException {
+    public void assignment1() {
         List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
         int highestCarriedCalories = sumCaloriesOfEachElf.stream().max(Integer::compareTo).orElse(-1);
         System.out.println("Elf with highest carry calories count: " + highestCarriedCalories);
     }
 
     @Test
-    public void assigment2() throws IOException {
+    public void assignment2() {
         List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
 
         sumCaloriesOfEachElf.sort(Integer::compareTo);

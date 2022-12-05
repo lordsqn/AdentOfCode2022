@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class AssigmentsTest {
+public class AssignmentsTest {
 
     public Pair<Range<Integer>, Range<Integer>> parseRanges(String line) {
         List<Integer> s = Arrays.stream(line.split("[,-]")).map(Integer::valueOf).collect(Collectors.toList());
@@ -19,7 +19,7 @@ public class AssigmentsTest {
     }
 
     @Test
-    public void assigment1() throws IOException {
+    public void assignment1() {
         AtomicInteger sum = new AtomicInteger();
 
         Utils.processLine("day4/input.txt", line -> {
@@ -32,7 +32,7 @@ public class AssigmentsTest {
     }
 
     @Test
-    public void assigment2() throws IOException {
+    public void assignment2() {
         AtomicInteger sum = new AtomicInteger();
 
         Utils.processLine("day4/input.txt", line -> {
@@ -41,7 +41,7 @@ public class AssigmentsTest {
                 sum.incrementAndGet();
         });
 
-        System.out.println("Partialy overlapped areas: " + sum);
+        System.out.println("Partially overlapped areas: " + sum);
     }
 
 }

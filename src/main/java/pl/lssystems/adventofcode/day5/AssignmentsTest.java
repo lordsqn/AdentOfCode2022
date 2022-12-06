@@ -10,7 +10,7 @@ public class AssignmentsTest {
     boolean procedureExecution = false;
 
     @Test
-    public void assignment1() throws IOException {
+    public void assignment1() {
         List<Deque<Character>> piles = new ArrayList<>();
         Utils.processLine("day5/input.txt", line -> {
             if (!procedureExecution) readArrangement(line, piles);

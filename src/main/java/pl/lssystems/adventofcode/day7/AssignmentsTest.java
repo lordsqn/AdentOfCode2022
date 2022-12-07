@@ -1,6 +1,6 @@
 package pl.lssystems.adventofcode.day7;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
 
@@ -10,28 +10,11 @@ public class AssignmentsTest {
 
     Command command = null;
 
-    public void analyzeInput() {
-        Utils.processLine("day7/input.txt", line -> {
-            if (line.startsWith("$")) command = (command == null) ? new Command(line) : command.recreate(line);
-            else command.feedOutput(line);
-        });
-        command.recreate(null);
-    }
-
     @Test
     public void assignment1() {
         analyzeInput();
         System.out.println("Tree Structure: \n" + TreeNode.printTree());
         System.out.println("Total size of directories with size below 100000: " + findSizeBelowNRecursive(TreeNode.getRoot(), 100000));
-    }
-
-    public long findSizeBelowNRecursive(TreeNode node, long size) {
-        long sizeSum = 0;
-        for (TreeNode child : node.getChildren()) {
-            sizeSum += (child.getType().equals(DIR) && child.getSize() < size) ? child.getSize() : 0;
-            sizeSum += findSizeBelowNRecursive(child, size);
-        }
-        return sizeSum;
     }
 
     @Test
@@ -48,13 +31,30 @@ public class AssignmentsTest {
         System.out.println(toRetrieve < 0 ?
                 "There is enough space to download update." :
                 "Best file to delete to get exact amount of space for update: " +
-                        findSmallestSizeDeltaRecursive(TreeNode.getRoot(), toRetrieve, new Pair<>(capacity, TreeNode.getRoot())).getValue().toString());
+                        findSmallestSizeDeltaRecursive(TreeNode.getRoot(), toRetrieve, Pair.of(capacity, TreeNode.getRoot())).getValue().toString());
+    }
+
+    public void analyzeInput() {
+        Utils.processLine("day7/input.txt", line -> {
+            if (line.startsWith("$")) command = (command == null) ? new Command(line) : command.recreate(line);
+            else command.feedOutput(line);
+        });
+        command.recreate(null);
+    }
+
+    public long findSizeBelowNRecursive(TreeNode node, long size) {
+        long sizeSum = 0;
+        for (TreeNode child : node.getChildren()) {
+            sizeSum += (child.getType().equals(DIR) && child.getSize() < size) ? child.getSize() : 0;
+            sizeSum += findSizeBelowNRecursive(child, size);
+        }
+        return sizeSum;
     }
 
     public Pair<Long, TreeNode> findSmallestSizeDeltaRecursive(TreeNode node, long toRetrieve, Pair<Long,TreeNode> smallestDelta) {
         long spaceUnallocated = toRetrieve - node.getSize();
         if (spaceUnallocated < 0 && Math.abs(spaceUnallocated) < smallestDelta.getKey())
-            smallestDelta = new Pair<>(Math.abs(spaceUnallocated), node);
+            smallestDelta = Pair.of(Math.abs(spaceUnallocated), node);
 
         for (TreeNode child : node.getChildren())
             if (child.getType().equals(DIR))

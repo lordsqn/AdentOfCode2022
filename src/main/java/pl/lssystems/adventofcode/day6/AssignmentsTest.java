@@ -3,7 +3,6 @@ package pl.lssystems.adventofcode.day6;
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
 
-import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

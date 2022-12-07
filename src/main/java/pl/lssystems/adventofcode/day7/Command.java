@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static pl.lssystems.adventofcode.day7.TreeNode.*;
+
 public class Command {
     enum CommandType {CD, LS}
 

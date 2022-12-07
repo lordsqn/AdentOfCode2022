@@ -3,7 +3,6 @@ package pl.lssystems.adventofcode.day1;
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

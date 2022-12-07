@@ -3,7 +3,6 @@ package pl.lssystems.adventofcode.day2;
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
 
-import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AssignmentsTest {

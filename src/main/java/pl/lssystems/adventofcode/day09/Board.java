@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day9;
+package pl.lssystems.adventofcode.day09;
 
 import java.util.ArrayList;
 import java.util.Collections;

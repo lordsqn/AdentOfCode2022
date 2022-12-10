@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day3;
+package pl.lssystems.adventofcode.day03;
 
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
@@ -18,7 +18,7 @@ public class AssignmentsTest {
     public void assignment1() {
         AtomicInteger sum = new AtomicInteger();
 
-        Utils.processLine("day3/input.txt", line -> {
+        Utils.processLine("day03/input.txt", line -> {
             char commonChar = findCommonLetter(line.substring(0, line.length()/2), line.substring(line.length()/2)).charAt(0);
             sum.addAndGet(Character.isUpperCase(commonChar) ? commonChar - 38 : commonChar - 96);
         });
@@ -31,7 +31,7 @@ public class AssignmentsTest {
         AtomicInteger sum = new AtomicInteger();
         AtomicBoolean sumGroup = new AtomicBoolean(false);
 
-        Utils.processLine("day3/input.txt", line -> {
+        Utils.processLine("day03/input.txt", line -> {
             if (buffer.isEmpty()) {
                 buffer = line;
                 return;

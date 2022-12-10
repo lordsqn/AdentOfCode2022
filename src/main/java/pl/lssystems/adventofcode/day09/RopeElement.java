@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day9;
+package pl.lssystems.adventofcode.day09;
 
 public interface RopeElement {
 

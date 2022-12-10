@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day6;
+package pl.lssystems.adventofcode.day06;
 
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
@@ -19,14 +19,14 @@ public class AssignmentsTest {
 
     @Test
     public void assignment1() {
-        Utils.processLine("day6/input.txt", line -> {
+        Utils.processLine("day06/input.txt", line -> {
             System.out.println("Index of signal marker: " + findNDistinctCharacters(line.toCharArray(), 4));
         });
     }
 
     @Test
     public void assignment2() {
-        Utils.processLine("day6/input.txt", line -> {
+        Utils.processLine("day06/input.txt", line -> {
             System.out.println("Index of message marker: " + findNDistinctCharacters(line.toCharArray(), 14));
         });
     }

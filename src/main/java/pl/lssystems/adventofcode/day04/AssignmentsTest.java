@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day4;
+package pl.lssystems.adventofcode.day04;
 
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.Pair;
@@ -21,7 +21,7 @@ public class AssignmentsTest {
     public void assignment1() {
         AtomicInteger sum = new AtomicInteger();
 
-        Utils.processLine("day4/input.txt", line -> {
+        Utils.processLine("day04/input.txt", line -> {
             Pair<Range<Integer>, Range<Integer>> r = parseRanges(line);
             if (r.getLeft().containsRange(r.getRight()) || r.getRight().containsRange(r.getLeft()))
                 sum.incrementAndGet();
@@ -34,7 +34,7 @@ public class AssignmentsTest {
     public void assignment2() {
         AtomicInteger sum = new AtomicInteger();
 
-        Utils.processLine("day4/input.txt", line -> {
+        Utils.processLine("day04/input.txt", line -> {
             Pair<Range<Integer>, Range<Integer>> r = parseRanges(line);
             if (r.getLeft().isOverlappedBy(r.getRight()))
                 sum.incrementAndGet();

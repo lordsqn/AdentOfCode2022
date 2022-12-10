@@ -1,10 +1,10 @@
-package pl.lssystems.adventofcode.day7;
+package pl.lssystems.adventofcode.day07;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
 
-import static pl.lssystems.adventofcode.day7.TreeNode.NodeType.*;
+import static pl.lssystems.adventofcode.day07.TreeNode.NodeType.*;
 
 public class AssignmentsTest {
 
@@ -35,7 +35,7 @@ public class AssignmentsTest {
     }
 
     public void analyzeInput() {
-        Utils.processLine("day7/input.txt", line -> {
+        Utils.processLine("day07/input.txt", line -> {
             if (line.startsWith("$")) command = (command == null) ? new Command(line) : command.recreate(line);
             else command.feedOutput(line);
         });

@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day5;
+package pl.lssystems.adventofcode.day05;
 
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
@@ -11,7 +11,7 @@ public class AssignmentsTest {
     @Test
     public void assignment1() {
         List<Deque<Character>> piles = new ArrayList<>();
-        Utils.processLine("day5/input.txt", line -> {
+        Utils.processLine("day05/input.txt", line -> {
             if (!procedureExecution) readArrangement(line, piles);
             if (procedureExecution) {
                 String[] split = line.split(" ");
@@ -33,7 +33,7 @@ public class AssignmentsTest {
     @Test
     public void assignment2() {
         List<Deque<Character>> piles = new ArrayList<>();
-        Utils.processLine("day5/input.txt", line -> {
+        Utils.processLine("day05/input.txt", line -> {
             if (!procedureExecution) readArrangement(line, piles);
             if (procedureExecution) {
                 String[] split = line.split(" ");

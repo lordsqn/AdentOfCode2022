@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day8;
+package pl.lssystems.adventofcode.day08;
 
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
@@ -12,7 +12,7 @@ public class AssignmentsTest {
 
     @Test
     public void assignment1() {
-        forest = new Forest(Utils.process("day8/input.txt", l -> l));
+        forest = new Forest(Utils.process("day08/input.txt", l -> l));
 
         int visibleTrees = 0;
         for (int y = 0; y < forest.getHeight(); y++)
@@ -24,7 +24,7 @@ public class AssignmentsTest {
 
     @Test
     public void assignment2() {
-        forest = new Forest(Utils.process("day8/input.txt", l -> l));
+        forest = new Forest(Utils.process("day08/input.txt", l -> l));
 
         List<Integer> treeScore = new ArrayList<>();
         for (int y = 0; y < forest.getHeight(); y++)

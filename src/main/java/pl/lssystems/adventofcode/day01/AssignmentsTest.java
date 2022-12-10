@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day1;
+package pl.lssystems.adventofcode.day01;
 
 import org.junit.jupiter.api.Test;
 import pl.lssystems.adventofcode.utils.Utils;
@@ -20,14 +20,14 @@ public class AssignmentsTest {
 
     @Test
     public void assignment1() {
-        List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
+        List<Integer> sumCaloriesOfEachElf = Utils.process("day01/input.txt", this::calculateSumOfCaloriesForEachElf);
         int highestCarriedCalories = sumCaloriesOfEachElf.stream().max(Integer::compareTo).orElse(-1);
         System.out.println("Elf with highest carry calories count: " + highestCarriedCalories);
     }
 
     @Test
     public void assignment2() {
-        List<Integer> sumCaloriesOfEachElf = Utils.process("day1/input.txt", this::calculateSumOfCaloriesForEachElf);
+        List<Integer> sumCaloriesOfEachElf = Utils.process("day01/input.txt", this::calculateSumOfCaloriesForEachElf);
 
         sumCaloriesOfEachElf.sort(Integer::compareTo);
         Collections.reverse(sumCaloriesOfEachElf);

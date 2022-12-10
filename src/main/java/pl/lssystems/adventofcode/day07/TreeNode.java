@@ -1,10 +1,10 @@
-package pl.lssystems.adventofcode.day7;
+package pl.lssystems.adventofcode.day07;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import static pl.lssystems.adventofcode.day7.TreeNode.NodeType.*;
+import static pl.lssystems.adventofcode.day07.TreeNode.NodeType.*;
 
 public class TreeNode {
     enum NodeType {DIR, FILE}

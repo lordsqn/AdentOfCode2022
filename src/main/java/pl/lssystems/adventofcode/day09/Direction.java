@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day9;
+package pl.lssystems.adventofcode.day09;
 
 public enum Direction {
     UP("U"), DOWN("D"), LEFT("L"), RIGHT("R"), NULL("N");

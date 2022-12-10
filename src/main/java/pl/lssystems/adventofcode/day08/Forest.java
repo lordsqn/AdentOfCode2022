@@ -1,8 +1,8 @@
-package pl.lssystems.adventofcode.day8;
+package pl.lssystems.adventofcode.day08;
 
 import java.util.List;
 
-import static pl.lssystems.adventofcode.day8.Direction.*;
+import static pl.lssystems.adventofcode.day08.Direction.*;
 
 public class Forest {
 

@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day9;
+package pl.lssystems.adventofcode.day09;
 
 public class Head implements RopeElement {
     private int x = 0;

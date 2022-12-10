@@ -1,11 +1,11 @@
-package pl.lssystems.adventofcode.day7;
+package pl.lssystems.adventofcode.day07;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import static pl.lssystems.adventofcode.day7.TreeNode.*;
+import static pl.lssystems.adventofcode.day07.TreeNode.*;
 
 public class Command {
     enum CommandType {CD, LS}

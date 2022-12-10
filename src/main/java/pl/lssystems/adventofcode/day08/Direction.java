@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day8;
+package pl.lssystems.adventofcode.day08;
 
 public enum Direction {
     NORTH(true, false, "Up"), SOUTH(false, true, "Down"),

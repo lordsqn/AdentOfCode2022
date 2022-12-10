@@ -1,4 +1,4 @@
-package pl.lssystems.adventofcode.day8;
+package pl.lssystems.adventofcode.day08;
 
 import java.util.HashMap;
 import java.util.Map;

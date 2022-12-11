@@ -2,18 +2,19 @@ package pl.lssystems.adventofcode.day11;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Monkey {
     private final String name;
-    private final LinkedList<Integer> holding = new LinkedList<>();
+    private final LinkedList<BigInteger> holding = new LinkedList<>();
     private Pair<Character, Object> operation;
-    private int testDivider = 0;
+    private int testDivider;
     private String positiveOutcomeMonkeyName;
     private String negativeOutcomeMonkeyName;
 
-    private int inspectionCounter = 0;
+    private long inspectionCounter = 0;
 
     public Monkey(String name) {
         this.name = name;
@@ -27,17 +28,17 @@ public class Monkey {
         return holding.stream().map(String::valueOf).collect(Collectors.joining(", "));
     }
 
-    public void addItem(int item) {
+    public void addItem(BigInteger item) {
         holding.add(item);
     }
 
-    public int inspectItem() {
-        int item = holding.pop();
+    public BigInteger inspectItem() {
+        BigInteger item = holding.pop();
         inspectionCounter++;
         return item;
     }
 
-    public int getInspectionCount() {
+    public long getInspectionCount() {
         return inspectionCounter;
     }
 
@@ -45,7 +46,7 @@ public class Monkey {
         return operation;
     }
 
-    public void throwItem(Monkey monkey, int item) {
+    public void throwItem(Monkey monkey, BigInteger item) {
         monkey.addItem(item);
     }
 

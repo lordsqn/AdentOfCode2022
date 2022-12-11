@@ -1,5 +1,6 @@
 package pl.lssystems.adventofcode.day11;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class MonkeyBuilder {
@@ -33,11 +34,14 @@ public class MonkeyBuilder {
 
     public Monkey build() {
         Monkey monkey = new Monkey(name);
-        Arrays.stream(items.split(", ")).forEach(item -> monkey.addItem(Integer.parseInt(item)));
+        Arrays.stream(items.split(", ")).forEach(item -> monkey.addItem(new BigInteger(item)));
+
         String[] factors = operation.split(" ");
         Object value = factors[1];
-        try{ value = Integer.parseInt((String)value);
-        } catch (NumberFormatException e) {/**/}
+        try {
+            value = Integer.parseInt(value.toString());
+        } catch (NumberFormatException e) {/* bu-hu */}
+
         monkey.setOperation(factors[0].charAt(0), value);
         monkey.setTestDivider(Integer.parseInt(test));
         monkey.setPositiveOutcomeMonkeyName(positiveOutcome);

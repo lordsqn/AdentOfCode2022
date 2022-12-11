@@ -2,14 +2,15 @@ package pl.lssystems.adventofcode.day11;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class MonkeyPlay {
-    int worryLevel = 0;
-
+    BigInteger worryLevel = new BigInteger("0");
+    boolean worryDivider = true;
     private final Map<String, Monkey> monkeys = new LinkedHashMap<>();
 
-    boolean playLogging = false;
+    boolean playSummary = false;
     boolean roundSummary = false;
     boolean gameSummary = true;
 
@@ -17,33 +18,32 @@ public class MonkeyPlay {
         monkeys.put(monkey.getName(), monkey);
     }
 
-    public List<Monkey> getMonkeys() {
-        return new ArrayList<>(monkeys.values());
-    }
-
     public void startPlay(int rounds) {
-        for (int round = 1; round <= rounds; round++) { /* rounds */                      if (playLogging) System.out.println("Start round 1");
-            for (Monkey monkey : monkeys.values()) {   /* turns */                        if (playLogging) System.out.println("Monkey " + monkey.getName() + ":");
+        long commonPrime = calculateCommonPrime();
+        for (int round = 1; round <= rounds; round++) { /* rounds */                if (playSummary) System.out.println("Start round " + round);
+            for (Monkey monkey : monkeys.values()) {   /* turns */                  if (playSummary) System.out.println("Monkey " + monkey.getName() + ":");
                 while(true) {
                     try {
-                        int itemValue = monkey.inspectItem();                             if (playLogging) System.out.println("  Monkey inspects an item with a worry level of " + itemValue);
-
+                        BigInteger itemValue = monkey.inspectItem().remainder(BigInteger.valueOf(commonPrime));
+                                                                                    if (playSummary) System.out.println("  Monkey inspects an item with a worry level of " + itemValue + ".");
                         Pair<Character, Object> operation = monkey.getItemWorryFormula();
 
                         char worryOperator = operation.getKey();
-                        int worryFactor = decodeWorryFactor(operation.getValue(), itemValue);
+                        BigInteger worryFactor = decodeWorryFactor(operation.getValue(), itemValue);
                         switch (worryOperator) {
-                            case '+': worryLevel = itemValue + worryFactor;               if (playLogging) System.out.println("    Worry level is increased by " + worryFactor + " to " + worryLevel + ".");
+                            case '+': worryLevel = itemValue.add(worryFactor);      if (playSummary) System.out.println("    Worry level increases by " + worryFactor + " to " + worryLevel + ".");
                                 break;
-                            case '*': worryLevel = itemValue * worryFactor;               if (playLogging) System.out.println("    Worry level is multiplied by " + worryFactor + " to " + worryLevel + ".");
+                            case '*': worryLevel = itemValue.multiply(worryFactor); if (playSummary) System.out.println("    Worry level is multiplied by " + worryFactor + " to " + worryLevel + ".");
                                 break;
                         }
-                        worryLevel =  worryLevel / 3;                                     if (playLogging) System.out.println("    Monkey gets bored with item. Worry level is divided by 3 to " + worryLevel + ".");
+                        if (worryDivider) {
+                            worryLevel = worryLevel.divide(BigInteger.valueOf(3));  if (playSummary) System.out.println("    Monkey gets bored with item. Worry level is divided by 3 to " + worryLevel + ".");
+                        }
 
-                        boolean testResult = worryLevel%monkey.getTestDivider() == 0;     if (playLogging) System.out.println("    Current worry level is " + (testResult ? "" : "not ") + "divisible by " + monkey.getTestDivider() + ".");
+                        boolean testResult = worryLevel.remainder(BigInteger.valueOf(monkey.getTestDivider())).equals(BigInteger.valueOf(0));
+                                                                                    if (playSummary) System.out.println("    Current worry level is " + (testResult ? "" : "not ") + "divisible by " + monkey.getTestDivider() + ".");
                         String nextMonkeyName = testResult ? monkey.getPositiveOutcomeMonkeyName() : monkey.getNegativeOutcomeMonkeyName();
-
-                        monkey.throwItem(monkeys.get(nextMonkeyName), worryLevel);        if (playLogging) System.out.println("    Item with worry level " + worryLevel + " is thrown to monkey " + nextMonkeyName + ".");
+                        monkey.throwItem(monkeys.get(nextMonkeyName), worryLevel);  if (playSummary) System.out.println("    Item with worry level " + worryLevel + " is thrown to monkey " + nextMonkeyName + ".");
                     } catch (NoSuchElementException e) {
                         break;
                     }
@@ -51,9 +51,8 @@ public class MonkeyPlay {
             }
             if (roundSummary) {
                 System.out.println("After round " + round + ", the monkeys are holding items with these worry levels:");
-                for (Monkey monkey : monkeys.values()) {
+                for (Monkey monkey : monkeys.values())
                     System.out.println("Monkey " + monkey.getName() + ": " + monkey.getHoldingItems());
-                }
             }
         }
         if (gameSummary)
@@ -61,21 +60,41 @@ public class MonkeyPlay {
                 System.out.println("Monkey " + monkey.getName() + " inspected items " + monkey.getInspectionCount() + " times.");
     }
 
-    public int getMonkeyBusiness() {
-        int[] topMonkeys = new int[2];
+    public long calculateCommonPrime() {
+        return monkeys.values().stream().mapToLong(Monkey::getTestDivider).reduce(1, (a, b) -> a * b);
+    }
+
+    public void setWorryDivider(boolean worryDivider) {
+        this.worryDivider = worryDivider;
+    }
+
+    public void printPlaySummary() {
+        this.playSummary = true;
+    }
+
+    public void printRoundSummary() {
+        this.roundSummary = true;
+    }
+
+    public void printGameSummary() {
+        this.gameSummary = true;
+    }
+
+    public String getMonkeyBusiness() {
+        long[] topMonkeys = new long[2];
         Collection<Monkey> group = monkeys.values();
         for (int i = 0; i < topMonkeys.length; i++) {
             Monkey highest = Collections.max(group, Comparator.comparing(Monkey::getInspectionCount));
             topMonkeys[i] = highest.getInspectionCount();
             group.remove(highest);
         }
-        return topMonkeys[0] * topMonkeys[1];
+        return BigInteger.valueOf(topMonkeys[0]).multiply(BigInteger.valueOf(topMonkeys[1])).toString();
     }
 
-    private int decodeWorryFactor(Object worryFactor, int itemValue) {
-        int factor = 0;
+    private BigInteger decodeWorryFactor(Object worryFactor, BigInteger itemValue) {
+        BigInteger factor = new BigInteger("0");
         if (worryFactor instanceof Integer) {
-            factor = (Integer) worryFactor;
+            factor = new BigInteger(String.valueOf(worryFactor));
         } else if (worryFactor instanceof String) {
             if (worryFactor.equals("old"))
                 factor = itemValue;

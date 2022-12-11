@@ -20,30 +20,27 @@ public class MonkeyPlay {
 
     public void startPlay(int rounds) {
         long commonPrime = calculateCommonPrime();
-        for (int round = 1; round <= rounds; round++) { /* rounds */                if (playSummary) System.out.println("Start round " + round);
-            for (Monkey monkey : monkeys.values()) {   /* turns */                  if (playSummary) System.out.println("Monkey " + monkey.getName() + ":");
+        for (int round = 1; round <= rounds; round++) { /* rounds */                     if (playSummary) System.out.println("Start round " + round);
+            for (Monkey monkey : monkeys.values()) {   /* turns */                       if (playSummary) System.out.println("Monkey " + monkey.getName() + ":");
                 while(true) {
                     try {
                         BigInteger itemValue = monkey.inspectItem().remainder(BigInteger.valueOf(commonPrime));
-                                                                                    if (playSummary) System.out.println("  Monkey inspects an item with a worry level of " + itemValue + ".");
-                        Pair<Character, Object> operation = monkey.getItemWorryFormula();
-
-                        char worryOperator = operation.getKey();
-                        BigInteger worryFactor = decodeWorryFactor(operation.getValue(), itemValue);
+                                                                                         if (playSummary) System.out.println("  Monkey inspects an item with a worry level of " + itemValue + ".");
+                        Operation worryOperator = monkey.getItemWorryFormula().getKey();
+                        BigInteger worryFactor = decodeWorryFactor(monkey.getItemWorryFormula().getValue(), itemValue);
                         switch (worryOperator) {
-                            case '+': worryLevel = itemValue.add(worryFactor);      if (playSummary) System.out.println("    Worry level increases by " + worryFactor + " to " + worryLevel + ".");
+                            case ADD: worryLevel = itemValue.add(worryFactor);           if (playSummary) System.out.println("    Worry level increases by " + worryFactor + " to " + worryLevel + ".");
                                 break;
-                            case '*': worryLevel = itemValue.multiply(worryFactor); if (playSummary) System.out.println("    Worry level is multiplied by " + worryFactor + " to " + worryLevel + ".");
+                            case MULTIPLY: worryLevel = itemValue.multiply(worryFactor); if (playSummary) System.out.println("    Worry level is multiplied by " + worryFactor + " to " + worryLevel + ".");
                                 break;
                         }
                         if (worryDivider) {
-                            worryLevel = worryLevel.divide(BigInteger.valueOf(3));  if (playSummary) System.out.println("    Monkey gets bored with item. Worry level is divided by 3 to " + worryLevel + ".");
+                            worryLevel = worryLevel.divide(BigInteger.valueOf(3));       if (playSummary) System.out.println("    Monkey gets bored with item. Worry level is divided by 3 to " + worryLevel + ".");
                         }
-
                         boolean testResult = worryLevel.remainder(BigInteger.valueOf(monkey.getTestDivider())).equals(BigInteger.valueOf(0));
-                                                                                    if (playSummary) System.out.println("    Current worry level is " + (testResult ? "" : "not ") + "divisible by " + monkey.getTestDivider() + ".");
+                                                                                         if (playSummary) System.out.println("    Current worry level is " + (testResult ? "" : "not ") + "divisible by " + monkey.getTestDivider() + ".");
                         String nextMonkeyName = testResult ? monkey.getPositiveOutcomeMonkeyName() : monkey.getNegativeOutcomeMonkeyName();
-                        monkey.throwItem(monkeys.get(nextMonkeyName), worryLevel);  if (playSummary) System.out.println("    Item with worry level " + worryLevel + " is thrown to monkey " + nextMonkeyName + ".");
+                        monkey.throwItem(monkeys.get(nextMonkeyName), worryLevel);       if (playSummary) System.out.println("    Item with worry level " + worryLevel + " is thrown to monkey " + nextMonkeyName + ".");
                     } catch (NoSuchElementException e) {
                         break;
                     }

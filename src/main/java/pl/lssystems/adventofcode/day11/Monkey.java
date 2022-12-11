@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Monkey {
     private final String name;
     private final LinkedList<BigInteger> holding = new LinkedList<>();
-    private Pair<Character, Object> operation;
+    private Pair<Operation, Object> operation;
     private int testDivider;
     private String positiveOutcomeMonkeyName;
     private String negativeOutcomeMonkeyName;
@@ -42,7 +42,7 @@ public class Monkey {
         return inspectionCounter;
     }
 
-    public Pair<Character, Object> getItemWorryFormula() {
+    public Pair<Operation, Object> getItemWorryFormula() {
         return operation;
     }
 
@@ -50,7 +50,7 @@ public class Monkey {
         monkey.addItem(item);
     }
 
-    protected void setOperation(char operation, Object value) {
+    protected void setOperation(Operation operation, Object value) {
         this.operation = Pair.of(operation, value);
     }
 

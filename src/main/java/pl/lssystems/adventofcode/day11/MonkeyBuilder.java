@@ -42,7 +42,7 @@ public class MonkeyBuilder {
             value = Integer.parseInt(value.toString());
         } catch (NumberFormatException e) {/* bu-hu */}
 
-        monkey.setOperation(factors[0].charAt(0), value);
+        monkey.setOperation(Operation.getOperationBySign(factors[0].charAt(0)), value);
         monkey.setTestDivider(Integer.parseInt(test));
         monkey.setPositiveOutcomeMonkeyName(positiveOutcome);
         monkey.setNegativeOutcomeMonkeyName(negativeOutcome);

@@ -9,9 +9,9 @@ public class AssignmentsTest {
     MonkeyPlay monkeyPlay = new MonkeyPlay();
 
     public void parseInput() {
-        monkeyPlay.printPlaySummary();
+        //monkeyPlay.printPlaySummary();
         //monkeyPlay.printRoundSummary();
-        //monkeyPlay.printGameSummary();
+        monkeyPlay.printGameSummary();
         Utils.processLine("day11/input.txt", line -> {
             monkeyBuilder.parseLine(line);
             if (line.startsWith("    If false:"))

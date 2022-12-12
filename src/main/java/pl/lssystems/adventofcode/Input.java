@@ -60,12 +60,12 @@ public class Input {
         return new ArrayList<>();
     }
 
-    public static List<char[]> readLinesAsChars() {
-        return readLines().stream().map(String::toCharArray).collect(Collectors.toList());
+    public static char[][] readLinesAsChars() {
+        return readLines().stream().map(String::toCharArray).collect(Collectors.toList()).toArray(new char[0][0]);
     }
 
-    public static List<int[]> readLinesAsInts() {
-        return readLines().stream().map(line -> Arrays.stream(line.split("")).mapToInt(Integer::parseInt).toArray()).collect(Collectors.toList());
+    public static int[][] readLinesAsInts() {
+        return readLines().stream().map(line -> Arrays.stream(line.split("")).mapToInt(Integer::parseInt).toArray()).collect(Collectors.toList()).toArray(new int[0][0]);
     }
 
     public static List<String> readStringWithDelimiter(String delimiter) {
@@ -142,11 +142,11 @@ public class Input {
     }
 
     public static void processLinesAsChars(Process<char[]> process) {
-        readLinesAsChars().forEach(process::process);
+        Arrays.stream(readLinesAsChars()).forEach(process::process);
     }
 
     public static void processLinesAsInts(Process<int[]> process) {
-        readLinesAsInts().forEach(process::process);
+        Arrays.stream(readLinesAsInts()).forEach(process::process);
     }
 
     public static void processStringWithDelimiter(String delimiter, Process<String> process) {

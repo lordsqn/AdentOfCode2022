@@ -8,12 +8,15 @@ public class AssignmentsTest {
 
     @Test @TaskInput
     public void assignment1() {
-
+        Grid grid = new Grid(Input.readLinesAsChars());
+        System.out.println(grid.findShortestPath());
     }
 
-    @Test
+    @Test @TaskInput
     public void assignment2() {
-
+        Grid grid = new Grid(Input.readLinesAsChars());
+        grid.setPosition(false);
+        System.out.println(grid.findShortestPath());
     }
 
 }

@@ -8,11 +8,11 @@ public class Forest {
 
     Tree[][] map;
 
-    public Forest(List<int[]> input) {
-        this.map = new Tree[input.size()][input.get(0).length];
-        for (int y = 0; y < input.size(); y++)
-            for (int x = 0; x < input.get(y).length; x++)
-                this.map[y][x] = new Tree(x, y, input.get(y)[x]);
+    public Forest(int[][] input) {
+        this.map = new Tree[input.length][input[0].length];
+        for (int y = 0; y < input.length; y++)
+            for (int x = 0; x < input[y].length; x++)
+                this.map[y][x] = new Tree(x, y, input[y][x]);
     }
 
     public int getWidth() {

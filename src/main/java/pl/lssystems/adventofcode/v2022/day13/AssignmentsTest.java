@@ -18,8 +18,6 @@ public class AssignmentsTest {
         System.out.println("Sum of right order packets indices: " + summary);
     }
 
-    int key = 1;
-
     @Test @TaskInput
     public void assignment2() {
         Input.processLinesSetsByLineDelimiter("\n", set -> set.forEach(line -> {

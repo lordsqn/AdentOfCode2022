@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Input {
@@ -76,8 +78,26 @@ public class Input {
         return readLines().stream().map(line -> line.split(delimiter, -1)).collect(Collectors.toList());
     }
 
+    public static List<String[]> readLinesWithPattern(String pattern) {
+        Pattern parsePattern = Pattern.compile(pattern);
+        return readLines().stream().map(line -> {
+            Matcher matcher = parsePattern.matcher(line);
+            if (!matcher.find()) throw new IllegalArgumentException();
+            String[] groups = new String[matcher.groupCount()];
+            for (int i = 0; i < matcher.groupCount(); i++)
+                groups[i] = matcher.group(i + 1);
+
+            return groups;
+        }).collect(Collectors.toList());
+    }
+
     public static List<Integer[]> readLinesWithDelimiterAsInt(String delimiter) {
         return readLines().stream().map(line -> line.split(delimiter, -1)).map(i -> Arrays.stream(i)
+                .map(Integer::valueOf).collect(Collectors.toList()).toArray(new Integer[0])).collect(Collectors.toList());
+    }
+
+    public static List<Integer[]> readLinesWithPatternAsInt(String pattern) {
+        return readLinesWithPattern(pattern).stream().map(i -> Arrays.stream(i)
                 .map(Integer::valueOf).collect(Collectors.toList()).toArray(new Integer[0])).collect(Collectors.toList());
     }
 
@@ -156,8 +176,17 @@ public class Input {
     public static void processLinesWithDelimiter(String delimiter, Process<String[]> process) {
         readLinesWithDelimiter(delimiter).forEach(process::process);
     }
+
+    public static void processLinesWithPattern(String delimiter, Process<String[]> process) {
+        readLinesWithPattern(delimiter).forEach(process::process);
+    }
+
     public static void processLinesWithDelimiterAsInt(String delimiter, Process<Integer[]> process) {
         readLinesWithDelimiterAsInt(delimiter).forEach(process::process);
+    }
+
+    public static void processLinesWithPatternAsInt(String delimiter, Process<Integer[]> process) {
+        readLinesWithPatternAsInt(delimiter).forEach(process::process);
     }
 
     public static void processLinesSetsByEmptyLineDelimiter(Process<List<String>> process) {

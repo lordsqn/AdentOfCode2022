@@ -177,16 +177,16 @@ public class Input {
         readLinesWithDelimiter(delimiter).forEach(process::process);
     }
 
-    public static void processLinesWithPattern(String delimiter, Process<String[]> process) {
-        readLinesWithPattern(delimiter).forEach(process::process);
+    public static void processLinesWithPattern(String pattern, Process<String[]> process) {
+        readLinesWithPattern(pattern).forEach(process::process);
     }
 
     public static void processLinesWithDelimiterAsInt(String delimiter, Process<Integer[]> process) {
         readLinesWithDelimiterAsInt(delimiter).forEach(process::process);
     }
 
-    public static void processLinesWithPatternAsInt(String delimiter, Process<Integer[]> process) {
-        readLinesWithPatternAsInt(delimiter).forEach(process::process);
+    public static void processLinesWithPatternAsInt(String pattern, Process<Integer[]> process) {
+        readLinesWithPatternAsInt(pattern).forEach(process::process);
     }
 
     public static void processLinesSetsByEmptyLineDelimiter(Process<List<String>> process) {

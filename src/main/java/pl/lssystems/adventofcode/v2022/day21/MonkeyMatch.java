@@ -86,35 +86,32 @@ public class MonkeyMatch {
     }
 
     public Long calculate(String operator, long left, long right) {
-        long result = 0;
         switch (operator) {
-            case "+": result = left + right; break;
-            case "-": result = left - right; break;
-            case "*": result = left * right; break;
-            case "/": result = left / right; break;
+            case "+": return left + right;
+            case "-": return left - right;
+            case "*": return left * right;
+            case "/": return left / right;
         }
-        return result;
+        return null;
     }
 
     public Long reverseCalculateLeft(String operator, long value, long operand) {
-        long result = 0;
         switch (operator) {
-            case "+": result = value - operand; break;
-            case "-": result = value + operand; break;
-            case "*": result = value / operand; break;
-            case "/": result = value * operand; break;
+            case "+": return value - operand;
+            case "-": return value + operand;
+            case "*": return value / operand;
+            case "/": return value * operand;
         }
-        return result;
+        return null;
     }
 
     public Long reverseCalculateRight(String operator, long value, long operand) {
-        long result = 0;
         switch (operator) {
-            case "+": result = value - operand; break;
-            case "-": result = operand - value; break;
-            case "*": result = value / operand; break;
-            case "/": result = operand / value; break;
+            case "+": return value - operand;
+            case "-": return operand - value;
+            case "*": return value / operand;
+            case "/": return operand / value;
         }
-        return result;
+        return null;
     }
 }
